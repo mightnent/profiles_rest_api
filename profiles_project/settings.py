@@ -23,7 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'wec!wq#vvo563pbfg_8s$*s_qplpi^k7iph#u4e7^=xyc0qqxh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#in the supervisor_profiles_api_conf, we set environment of DEBUG to zero when on live server.
+# 0 = False, 1 = True
+# the 1 is default when DEBUG does not exist
+DEBUG = bool(int(os.environ.get('DEBUG',1)))
 
 ALLOWED_HOSTS = []
 
@@ -124,3 +127,5 @@ STATIC_URL = '/static/'
 
 #will auto go into models.py. this is to specify which class to take
 AUTH_USER_MODEL = 'profiles_api.UserProfile'
+
+STATIC_ROOT = 'static/'
