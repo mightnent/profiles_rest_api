@@ -28,7 +28,7 @@ SECRET_KEY = 'wec!wq#vvo563pbfg_8s$*s_qplpi^k7iph#u4e7^=xyc0qqxh'
 # the 1 is default when DEBUG does not exist
 DEBUG = bool(int(os.environ.get('DEBUG',1)))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-13-250-13-109.ap-southeast-1.compute.amazonaws.com','127.0.0.1']
 
 
 # Application definition
