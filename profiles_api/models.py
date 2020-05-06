@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
+from django.conf import settings #import the project setting
 # Create your models here.
 
 class UserProfileManager(BaseUserManager):
@@ -49,3 +50,17 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
     
     def __str__(self):
         return self.email
+
+class ProfileFeedItem(models.Model):
+    """profile status update"""
+    user_profile = models.ForeignKey(
+        #reference to the Userprofilemodel from settings. Although its also in this file, we avoid hard coding
+        settings.AUTH_USER_MODEL,
+        #what happens if we delete the profile? we cascade and delete the feed obj as well
+        on_delete = models.CASCADE
+    )
+    status_text = models.CharField(max_length = 255)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.status_text

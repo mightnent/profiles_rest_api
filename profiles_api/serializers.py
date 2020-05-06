@@ -41,3 +41,10 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
         #if you dont super, then it becomes recurssion. lol
         return super().update(instance,validated_data)
+
+class ProfileFeedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ProfileFeedItem
+        fields = ('id','user_profile','status_text','created_on')
+        extra_kwargs = {'user_profile':{'read_only':True}}
+        #id and created on is auto read only
